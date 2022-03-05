@@ -1,0 +1,12 @@
+Controller\ProdutoController.class
+Model\Endereco.class
+Model\Fornecedor.class
+Model\Fornecedor$Endereco.class
+Model\Usuario.class
+Model\Fornecedor$Produto.class
+Connection\Conexao.class
+Model\Produto.class
+Controller\EnderecoController.class
+Controller\FornecedorController.class
+Controller\UsuarioController.class
+Model\main.class
