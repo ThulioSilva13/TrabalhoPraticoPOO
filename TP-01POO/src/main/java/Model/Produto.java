@@ -6,15 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 public class Produto{
-    private int id;
-    private String nome;
-    private Double preco;
-    private int quantidade;
-    private String tamanho;
-    private String categoria;
-    private String modelo;
-    private String cor;
+    public int id;
+    public String nome;
+    public Double preco;
+    public int quantidade;
+    public String tamanho;
+    public String categoria;
+    public String modelo;
+    public String cor;
     
     //Constructor
     /*public enum Categoria{
@@ -39,24 +40,26 @@ public class Produto{
         this.cor = Cor;
     }
     public void save(Produto produto){
-        String sql = "INSERT INTO contatos(nome,idade,dataCadastro)" +
-        " VALUES(?,?,?)";
+        String sql = "INSERT INTO produtos(nome,preco,quantidade,tamanho,categoria,modelo,cor)" +
+        " VALUES(?,?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, produto.id);
-        pstm.setString(2,produto.nome);
-        pstm.setDouble(3, produto.preco);
-        pstm.setInt(4, produto.quantidade);
-        pstm.setString(5,produto.tamanho);
-        pstm.setString(6, produto.categoria);
-        pstm.setString(7, produto.modelo);
-        pstm.setString(8,produto.cor);
-        pstm.execute();
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, produto.id);
+            pstm.setString(2,produto.nome);
+            pstm.setDouble(3, produto.preco);
+            pstm.setInt(4, produto.quantidade);
+            pstm.setString(5,produto.tamanho);
+            pstm.setString(6, produto.categoria);
+            pstm.setString(7, produto.modelo);
+            pstm.setString(8,produto.cor);
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Produto inserido com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao inserir produto");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -72,7 +75,7 @@ public class Produto{
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM contatos WHERE id = ?";
+        String sql = "DELETE FROM produtos WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -80,6 +83,7 @@ public class Produto{
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
             pstm.execute();
+            JOptionPane.showMessageDialog(null, "Produto removido com sucesso");
             }catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -97,7 +101,7 @@ public class Produto{
             }
     }
     public void update(Produto produto){
-        String sql = "UPDATE contatos SET nome = ?, idade = ?, dataCadastro = ?" +
+        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade = ?, tamanho = ?, categoria = ?, modelo = ?, cor = ?" +
         " WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -114,6 +118,7 @@ public class Produto{
         pstm.setString(8,produto.cor);
         //Executa a sql para inserção dos dados
         pstm.execute();
+        JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso");
         } catch (Exception e) {
         e.printStackTrace();
         }finally{
@@ -130,7 +135,6 @@ public class Produto{
             }
         }
     }
-
  public List<Produto> getProdutos(){
         String sql = "SELECT * FROM produto";
         List<Produto> produtos = new ArrayList<Produto>();

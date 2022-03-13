@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Fornecedor {
     public int id;
@@ -24,19 +25,21 @@ public class Fornecedor {
     }
 
     public void save(Fornecedor fornecedor){
-        String sql = "INSERT INTO contatos(categoria,telefone,nome)" +
+        String sql = "INSERT INTO fornecedor(categoria,telefone,nome)" +
         " VALUES(?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1,fornecedor.categoria);
-        pstm.setString(2, fornecedor.telefone);
-        pstm.setString(3, fornecedor.nome);
-        pstm.execute();
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1,fornecedor.categoria);
+            pstm.setString(2, fornecedor.telefone);
+            pstm.setString(3, fornecedor.nome);
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Fornecedor inserido com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao inserir fornecedor");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -60,8 +63,10 @@ public class Fornecedor {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
             pstm.execute();
+            JOptionPane.showMessageDialog(null, "Fornecedor removido com sucesso");
             }catch (Exception e) {
                 // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "Erro ao remover fornecedor");
                 e.printStackTrace();
             }finally{
                 try{
@@ -77,22 +82,23 @@ public class Fornecedor {
             }
     }
     public void update(Fornecedor fornecedor){
-        String sql = "UPDATE contatos SET nome = ?, idade = ?, dataCadastro = ?" +
+        String sql = "UPDATE contatos SET categoria = ?, telefone = ?, nome = ?" +
         " WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, fornecedor.id);
-        pstm.setString(2,fornecedor.categoria);
-        pstm.setString(3, fornecedor.telefone);
-        pstm.setString(4, fornecedor.nome);
-        //Executa a sql para inserção dos dados
-        pstm.execute();
-        
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, fornecedor.id);
+            pstm.setString(2,fornecedor.categoria);
+            pstm.setString(3, fornecedor.telefone);
+            pstm.setString(4, fornecedor.nome);
+            //Executa a sql para inserção dos dados
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Fornecedor atualizado com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao remover fornecedor");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -602,11 +608,6 @@ public class Fornecedor {
 
         public void setCEP(String CEP) {
             this.CEP = CEP;
-        }
-
-        //GetAll
-        public void printAll(){
-            System.out.printf("Id:%d\nNumero:%d\nRua:%s\nBairro:%s\nCidade:%s\nEstado:%s\nPaís:%s\nCEP:%s\n ",this.id,this.numero,this.rua,this.bairro,this.cidade, this.estado, this.pais, this.CEP);
         }
     }
 }

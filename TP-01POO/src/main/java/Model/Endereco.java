@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 public class Endereco {
     public int id;
     public int numero;
@@ -34,18 +35,20 @@ public class Endereco {
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setInt(1,endereco.numero);
-        pstm.setString(2, endereco.rua);
-        pstm.setString(3, endereco.bairro);
-        pstm.setString(4, endereco.cidade);
-        pstm.setString(5, endereco.estado);
-        pstm.setString(6, endereco.pais);
-        pstm.setString(7, endereco.CEP);
-        pstm.execute();
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1,endereco.numero);
+            pstm.setString(2, endereco.rua);
+            pstm.setString(3, endereco.bairro);
+            pstm.setString(4, endereco.cidade);
+            pstm.setString(5, endereco.estado);
+            pstm.setString(6, endereco.pais);
+            pstm.setString(7, endereco.CEP);
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Enderço inserido com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Não foi possível inserir o endereço");
+             e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -69,8 +72,10 @@ public class Endereco {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
             pstm.execute();
+            JOptionPane.showMessageDialog(null,"Endereço removido com sucesso");
             }catch (Exception e) {
                 // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null,"Não foi possível remover o endereço");
                 e.printStackTrace();
             }finally{
                 try{
@@ -91,20 +96,21 @@ public class Endereco {
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, endereco.getNumero());
-        pstm.setString(2, endereco.getRua());
-        pstm.setString(3,endereco.getBairro());
-        pstm.setString(4, endereco.getCidade());
-        pstm.setString(5, endereco.getEstado());
-        pstm.setString(6, endereco.getPais());
-        pstm.setString(7, endereco.getCEP());
-        //Executa a sql para inserção dos dados
-        pstm.execute();
-        
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, endereco.getNumero());
+            pstm.setString(2, endereco.getRua());
+            pstm.setString(3,endereco.getBairro());
+            pstm.setString(4, endereco.getCidade());
+            pstm.setString(5, endereco.getEstado());
+            pstm.setString(6, endereco.getPais());
+            pstm.setString(7, endereco.getCEP());
+            //Executa a sql para inserção dos dados
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Endereço atualizado com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Não foi possível atualizar o endereço");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -120,27 +126,27 @@ public class Endereco {
         }
     }
     public List<Endereco> getEndereco(){
-        String sql = "SELECT * FROM contatos";
+        String sql = "SELECT * FROM endereco";
         List<Endereco> enderecos = new ArrayList<Endereco>();
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rset = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        rset = pstm.executeQuery();
-        while(rset.next()){
-        Endereco endereco = new Endereco();
-        endereco.setId(rset.getInt("id"));
-        endereco.setNumero(rset.getInt("numero"));
-        endereco.setBairro(rset.getString("bairro"));
-        endereco.setCidade(rset.getString("cidade"));
-        endereco.setEstado(rset.getString("estado"));
-        endereco.setPais(rset.getString("pais"));
-        endereco.setCEP(rset.getString("cep"));
-        }
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+            while(rset.next()){
+                Endereco endereco = new Endereco();
+                endereco.setId(rset.getInt("id_endereco"));
+                endereco.setNumero(rset.getInt("numero"));
+                endereco.setBairro(rset.getString("bairro"));
+                endereco.setCidade(rset.getString("cidade"));
+                endereco.setEstado(rset.getString("estado"));
+                endereco.setPais(rset.getString("pais"));
+                endereco.setCEP(rset.getString("cep"));
+            }
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }finally{
             try{
             if(rset != null){
@@ -224,10 +230,5 @@ public class Endereco {
 
     public void setCEP(String CEP) {
         this.CEP = CEP;
-    }
-
-    //GetAll
-    public void printAll(){
-        System.out.printf("Id:%d\nNumero:%d\nRua:%s\nBairro:%s\nCidade:%s\nEstado:%s\nPaís:%s\nCEP:%s\n ",this.id,this.numero,this.rua,this.bairro,this.cidade, this.estado, this.pais, this.CEP);
     }
 }

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Usuario {
     public int id;
@@ -36,24 +37,26 @@ public class Usuario {
     }
 
     public void save(Usuario usuario){
-        String sql = "INSERT INTO contatos(nome,email,password,isAdmin,telefone,endereco)" +
+        String sql = "INSERT INTO usuario (nome,email,password,isAdmin,telefone,endereco)" +
         " VALUES(?,?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1, usuario.nome);
-        pstm.setString(2, usuario.email);
-        pstm.setString(3, usuario.password);
-        pstm.setBoolean(4, usuario.isAdmin);
-        pstm.setString(5, usuario.telefone);
-        pstm.setObject(6, usuario.endereço);
-        usuario.creationDate = new Date();
-        usuario.exclusionDate = null;
-        pstm.execute();
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, usuario.nome);
+            pstm.setString(2, usuario.email);
+            pstm.setString(3, usuario.password);
+            pstm.setBoolean(4, usuario.isAdmin);
+            pstm.setString(5, usuario.telefone);
+            pstm.setObject(6, usuario.endereço);
+            usuario.creationDate = new Date();
+            usuario.exclusionDate = null;
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Usuario inserido com sucesso");
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao inserir usuario");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -69,7 +72,7 @@ public class Usuario {
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM contatos WHERE id = ?";
+        String sql = "DELETE FROM usuario WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -77,6 +80,7 @@ public class Usuario {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
             pstm.execute();
+            JOptionPane.showMessageDialog(null, "Usuario removido com sucesso");
             }catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -94,23 +98,25 @@ public class Usuario {
             }
     }
     public void update(Usuario usuario){
-        String sql = "UPDATE contatos SET nome = ?, email = ?, password = ?, isAdmin = ?, telefone = ?, endereco =?" +
+        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, isAdmin = ?, telefone = ?, endereco =?" +
         " WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1,usuario.nome);
-        pstm.setString(2, usuario.email);
-        pstm.setString(3, usuario.password);
-        pstm.setString(4, usuario.telefone);
-        pstm.setObject(5, usuario.endereço);
-        //Executa a sql para inserção dos dados
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1,usuario.nome);
+            pstm.setString(2, usuario.email);
+            pstm.setString(3, usuario.password);
+            pstm.setString(4, usuario.telefone);
+            pstm.setObject(5, usuario.endereço);
+            //Executa a sql para inserção dos dados
+            JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso");
         pstm.execute();
         
         } catch (Exception e) {
-        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar usuario");
+            e.printStackTrace();
         }finally{
             try{
                 if(pstm != null){
@@ -232,12 +238,6 @@ public class Usuario {
 
     public void setExclusionDate(Date exclusionDate) {
         this.exclusionDate = exclusionDate;
-    }
-
-    //GetAll
-    public void printAll(){
-        System.out.printf("Id:%d\nNome:%s\nEmail:%s\nIsAdmin:%s\nTelefone:%s\n ",this.id,this.nome,this.email,this.isAdmin, this.telefone);
-        this.endereço.printAll();
     }
 
 }
