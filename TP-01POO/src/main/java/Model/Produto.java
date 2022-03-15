@@ -40,21 +40,18 @@ public class Produto{
         this.cor = Cor;
     }
     public void save(Produto produto){
-        String sql = "INSERT INTO produtos(nome,preco,quantidade,tamanho,categoria,modelo,cor)" +
-        " VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO produto(nome,preco,quantidade,modelo,cor)" +
+        " VALUES(?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
             conn = Conexao.getConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, produto.id);
-            pstm.setString(2,produto.nome);
-            pstm.setDouble(3, produto.preco);
-            pstm.setInt(4, produto.quantidade);
-            pstm.setString(5,produto.tamanho);
-            pstm.setString(6, produto.categoria);
-            pstm.setString(7, produto.modelo);
-            pstm.setString(8,produto.cor);
+            pstm.setString(1,produto.nome);
+            pstm.setDouble(2, produto.preco);
+            pstm.setInt(3, produto.quantidade);
+            pstm.setString(4, produto.modelo);
+            pstm.setString(5,produto.cor);
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Produto inserido com sucesso");
         } catch (Exception e) {
@@ -75,7 +72,7 @@ public class Produto{
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM produtos WHERE id = ?";
+        String sql = "DELETE FROM produto WHERE id_produto = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -85,7 +82,7 @@ public class Produto{
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Produto removido com sucesso");
             }catch (Exception e) {
-                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "Erro ao remover produto");
                 e.printStackTrace();
             }finally{
                 try{
@@ -101,25 +98,25 @@ public class Produto{
             }
     }
     public void update(Produto produto){
-        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade = ?, tamanho = ?, categoria = ?, modelo = ?, cor = ?" +
-        " WHERE id = ?";
+        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade = ?, modelo = ?, cor = ?" +
+        " WHERE id_produto = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
         conn = Conexao.getConexao();
         pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, produto.id);
-        pstm.setString(2,produto.nome);
-        pstm.setDouble(3, produto.preco);
-        pstm.setInt(4, produto.quantidade);
-        pstm.setString(5,produto.tamanho);
-        pstm.setString(6, produto.categoria);
-        pstm.setString(7, produto.modelo);
-        pstm.setString(8,produto.cor);
+        pstm.setString(1,produto.getNome());
+        pstm.setDouble(2, produto.getPreco());
+        pstm.setInt(3, produto.getQuantidade());
+        pstm.setString(4, produto.getModelo());
+        pstm.setString(5,produto.getCor());
+        pstm.setInt(6, produto.getId());
         //Executa a sql para inserção dos dados
         pstm.execute();
         JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Produto");
+            
         e.printStackTrace();
         }finally{
             try{
@@ -135,7 +132,67 @@ public class Produto{
             }
         }
     }
- public List<Produto> getProdutos(){
+    
+    public int getEstoque(int id){
+        String sql = "SELECT quantidade FROM produto WHERE id_produto = ?";
+        int quantidade = 0;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        try{
+            pstm.setInt(1, id);
+            quantidade = rset.getInt("quantidade");
+            JOptionPane.showMessageDialog(null, "A quantidade é: " +quantidade);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao obter quantidade");
+            e.printStackTrace();
+        }finally{
+            try{
+                if(rset != null){
+                rset.close();
+                }
+                if(pstm != null){
+                pstm.close();
+                }
+                if(conn != null){
+                conn.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return quantidade;
+    }
+    
+   public void setEstoque(int id, int qntd){
+       String sql = "UPDATE produto SET quantidade = ? WHERE id_produto = ?";
+       Connection conn = null;
+       PreparedStatement pstm = null;
+       try{
+           conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1,qntd);
+            pstm.setInt(2,id);
+            JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso");
+       }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar estoque\n"+e);
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pstm != null){
+                pstm.close();
+                }
+                
+                if(conn != null){
+                conn.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+   }
+    
+  public List<Produto> getProdutos(){
         String sql = "SELECT * FROM produto";
         List<Produto> produtos = new ArrayList<Produto>();
         Connection conn = null;
@@ -147,14 +204,15 @@ public class Produto{
             rset = pstm.executeQuery();
             while(rset.next()){
                 Produto produto = new Produto();
-                produto.setId(rset.getInt("id"));
                 produto.setNome(rset.getString("nome"));
                 produto.setPreco(rset.getDouble("preco"));
                 produto.setQuantidade(rset.getInt("quantidade"));
-                produto.setTamanho(rset.getString("tamanho"));
-                produto.setCategoria(rset.getString("categoria"));
                 produto.setModelo(rset.getString("modelo"));
                 produto.setCor(rset.getString("cor"));
+                produtos.add(produto);
+            }
+            for(int i = 0; i < produtos.size(); i++){
+                JOptionPane.showMessageDialog(null, produtos.get(i).ToString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,6 +233,12 @@ public class Produto{
         }
           return produtos;
  }
+  
+   public String ToString(){
+        return "Nome: "+ this.nome+ "\nPreço: R$"+ this.preco+ "\nQuantidade: "
+                + this.quantidade+ "\nModelo: "+ this.modelo+ 
+                "\nCor: "+ this.cor;
+    }
     public int getId() {
         return id;
     }

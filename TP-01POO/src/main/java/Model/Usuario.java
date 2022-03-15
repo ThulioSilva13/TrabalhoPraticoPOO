@@ -98,7 +98,7 @@ public class Usuario {
             }
     }
     public void update(Usuario usuario){
-        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, isAdmin = ?, telefone = ?, endereco =?" +
+        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, isAdmin = ?, telefone = ?, endereco = ?" +
         " WHERE id = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -131,6 +131,7 @@ public class Usuario {
             }
         }
     }
+    
     public List<Usuario> getUsuario(){
         String sql = "SELECT * FROM usuario";
         List<Usuario> enderecos = new ArrayList<Usuario>();

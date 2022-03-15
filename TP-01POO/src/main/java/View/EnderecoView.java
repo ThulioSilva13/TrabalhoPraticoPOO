@@ -96,7 +96,7 @@ public class EnderecoView extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
-        Endereco endereco = new Endereco();
+       Endereco endereco = new Endereco();
        endereco.rua = JOptionPane.showInputDialog("Digite a rua");
        endereco.numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero"));
        endereco.bairro = JOptionPane.showInputDialog("Digite o bairro");
@@ -114,6 +114,7 @@ public class EnderecoView extends javax.swing.JFrame {
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         Endereco endereco = new Endereco();
+        endereco.id =  Integer.parseInt(JOptionPane.showInputDialog("Digite o id do Endereço que quer editar"));
         endereco.rua = JOptionPane.showInputDialog("Digite a rua");
         endereco.numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero"));
         endereco.bairro = JOptionPane.showInputDialog("Digite o bairro");

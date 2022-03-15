@@ -55,7 +55,7 @@ public class Fornecedor {
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM contatos WHERE id = ?";
+        String sql = "DELETE FROM fornecedor WHERE id_fornecedor = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -82,8 +82,8 @@ public class Fornecedor {
             }
     }
     public void update(Fornecedor fornecedor){
-        String sql = "UPDATE contatos SET categoria = ?, telefone = ?, nome = ?" +
-        " WHERE id = ?";
+        String sql = "UPDATE fornecedor SET categoria = ?, telefone = ?, nome = ?" +
+        " WHERE id_fornecedor = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {

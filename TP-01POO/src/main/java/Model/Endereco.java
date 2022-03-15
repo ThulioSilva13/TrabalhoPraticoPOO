@@ -91,8 +91,9 @@ public class Endereco {
             }
     }
     public void update(Endereco endereco){
-        String sql = "UPDATE endereco SET numero = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, cidade = ?, pais = ?, cep = ?" +
-        " WHERE id = ?";
+        String sql = "UPDATE endereco SET numero = ?, rua = ?, bairro = ?, "
+                + "estado = ?, cidade = ?, pais = ?, cep = ?" +
+        " WHERE id_endereco = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -105,6 +106,7 @@ public class Endereco {
             pstm.setString(5, endereco.getEstado());
             pstm.setString(6, endereco.getPais());
             pstm.setString(7, endereco.getCEP());
+            pstm.setInt(8, endereco.getId());
             //Executa a sql para inserção dos dados
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Endereço atualizado com sucesso");
@@ -137,14 +139,19 @@ public class Endereco {
             rset = pstm.executeQuery();
             while(rset.next()){
                 Endereco endereco = new Endereco();
-                endereco.setId(rset.getInt("id_endereco"));
+                endereco.setRua(rset.getString("rua"));
                 endereco.setNumero(rset.getInt("numero"));
                 endereco.setBairro(rset.getString("bairro"));
                 endereco.setCidade(rset.getString("cidade"));
                 endereco.setEstado(rset.getString("estado"));
                 endereco.setPais(rset.getString("pais"));
                 endereco.setCEP(rset.getString("cep"));
+                enderecos.add(endereco);
             }
+            for(int i = 0; i < enderecos.size(); i++){
+                JOptionPane.showMessageDialog(null, enderecos.get(i).ToString());
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
@@ -168,6 +175,12 @@ public class Endereco {
 
 
 
+    
+    public String ToString(){
+        return "Rua: "+ this.rua+ "\nNumero: "+ this.numero+ "\nBairro: "
+                + this.bairro+ "\nCidade: "+ this.cidade+ 
+                "\nPaís: "+ this.pais+ "\nCEP: "+ this.CEP;
+    }
     public int getId() {
         return id;
     }

@@ -97,13 +97,11 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
         Produto produto = new Produto();
-        produto.nome = JOptionPane.showInputDialog("Digite a rua");
-        produto.preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o numero"));
-        produto.cor = JOptionPane.showInputDialog("Digite o bairro");
-        produto.modelo = JOptionPane.showInputDialog("Digite a cidade");
-        produto.categoria = JOptionPane.showInputDialog("Digite o estado");
-        produto.tamanho = JOptionPane.showInputDialog("Digite o país");
-        produto.quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite o CEP"));
+        produto.nome = JOptionPane.showInputDialog("Digite o nome do Produto");
+        produto.preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o Preço"));
+        produto.cor = JOptionPane.showInputDialog("Digite a cor");
+        produto.modelo = JOptionPane.showInputDialog("Digite o modelo");
+        produto.quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade"));
         produto.save(produto);
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -114,14 +112,13 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
        Produto produto = new Produto();
-        produto.nome = JOptionPane.showInputDialog("Digite a rua");
-        produto.preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o numero"));
-        produto.cor = JOptionPane.showInputDialog("Digite o bairro");
-        produto.modelo = JOptionPane.showInputDialog("Digite a cidade");
-        produto.categoria = JOptionPane.showInputDialog("Digite o estado");
-        produto.tamanho = JOptionPane.showInputDialog("Digite o país");
-        produto.quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite o CEP"));
-        produto.update(produto);
+       produto.id =  Integer.parseInt(JOptionPane.showInputDialog("Digite o id do produto que quer editar"));
+       produto.nome = JOptionPane.showInputDialog("Digite o nome do Produto");
+       produto.preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o Preço"));
+       produto.cor = JOptionPane.showInputDialog("Digite a cor");
+       produto.modelo = JOptionPane.showInputDialog("Digite o modelo");
+       produto.quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade"));
+       produto.update(produto);
     }//GEN-LAST:event_UpdateActionPerformed
 
 

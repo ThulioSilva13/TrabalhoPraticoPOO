@@ -44,10 +44,25 @@ public class MenuFrame extends javax.swing.JFrame {
         });
 
         Fornecedor.setText("Fornecedor");
+        Fornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FornecedorActionPerformed(evt);
+            }
+        });
 
         Produto.setText("Produto");
+        Produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProdutoActionPerformed(evt);
+            }
+        });
 
         Usuario.setText("Usuario");
+        Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,6 +107,21 @@ public class MenuFrame extends javax.swing.JFrame {
         enderecoView.setVisible(true);
     }//GEN-LAST:event_EnderecoActionPerformed
 
+    private void FornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FornecedorActionPerformed
+        FornecedorView fornecedorView = new FornecedorView();
+        fornecedorView.setVisible(true);
+    }//GEN-LAST:event_FornecedorActionPerformed
+
+    private void ProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutoActionPerformed
+        ProdutoView produtoView = new ProdutoView();
+        produtoView.setVisible(true);
+    }//GEN-LAST:event_ProdutoActionPerformed
+
+    private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
+        UsuarioView usuarioView = new UsuarioView();
+        usuarioView.setVisible(true);
+    }//GEN-LAST:event_UsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -122,7 +152,8 @@ public class MenuFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuFrame().setVisible(true);
+                MenuFrame menu = new MenuFrame();
+                menu.setVisible(true);
             }
         });
     }
