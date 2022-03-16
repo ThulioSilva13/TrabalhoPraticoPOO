@@ -173,8 +173,8 @@ public class Endereco {
             return enderecos;
         }
 
-     public int getIdEndereco(Endereco endereco){
-        String sql = "SELECT id_endereco FROM endereco WHERE id_endereco = ?";
+     public int getIdEndereco(){
+        String sql = "SELECT id_endereco FROM endereco ORDER BY id_endereco DESC LIMIT 1";
         int id = 0;
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -182,13 +182,9 @@ public class Endereco {
         try{
             conn = Conexao.getConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, endereco.getId());
             rset = pstm.executeQuery();
-            if(rset.next()){
-               id = rset.getInt("id_endereco");
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro ao obter endereço");
-            }
+            rset.next();
+            id = rset.getInt("id_endereco");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao obter id");
             e.printStackTrace();

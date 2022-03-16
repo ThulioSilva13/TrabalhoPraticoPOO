@@ -4,6 +4,7 @@
  */
 package View;
 
+import Model.Endereco;
 import Model.Usuario;
 import javax.swing.JOptionPane;
 
@@ -97,11 +98,22 @@ public class UsuarioView extends javax.swing.JFrame {
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
         Usuario usuario = new Usuario();
+        Endereco endereco = new Endereco();
+        JOptionPane.showMessageDialog(null, "Para concluir o cadastro do fornecedor, cadastre seu endereço!");
+        endereco.rua = JOptionPane.showInputDialog("Digite a rua");
+        endereco.numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero"));
+        endereco.bairro = JOptionPane.showInputDialog("Digite o bairro");
+        endereco.cidade = JOptionPane.showInputDialog("Digite a cidade");
+        endereco.estado = JOptionPane.showInputDialog("Digite o estado");
+        endereco.pais = JOptionPane.showInputDialog("Digite o país");
+        endereco.CEP = JOptionPane.showInputDialog("Digite o CEP");
+        endereco.save(endereco);
+        int id_endereco = endereco.getIdEndereco();
         usuario.nome = JOptionPane.showInputDialog("Digite o nome");
         usuario.email = (JOptionPane.showInputDialog("Digite o email"));
         usuario.password = JOptionPane.showInputDialog("Digite a senha");
-        usuario.endereco = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereço"));
         usuario.isAdmin = Boolean.parseBoolean(JOptionPane.showInputDialog("Digite 1 para admin e 0 para comum"));
+        usuario.endereco = id_endereco;
         usuario.save(usuario);
     }//GEN-LAST:event_InsertActionPerformed
 

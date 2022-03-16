@@ -35,7 +35,7 @@ public class Usuario {
     }
 
     public void save(Usuario usuario){
-        String sql = "INSERT INTO user (nome,email,password,isAdmin,endereco)" +
+        String sql = "INSERT INTO user (nome,email,password,isAdmin,id_endereco)" +
         " VALUES(?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -46,7 +46,7 @@ public class Usuario {
             pstm.setString(2, usuario.email);
             pstm.setString(3, usuario.password);
             pstm.setBoolean(4, usuario.isAdmin);
-            pstm.setInt(6, usuario.endereco);
+            pstm.setInt(5, usuario.endereco);
                        
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Usuario inserido com sucesso");
