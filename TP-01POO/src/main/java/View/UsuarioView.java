@@ -97,12 +97,11 @@ public class UsuarioView extends javax.swing.JFrame {
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
         Usuario usuario = new Usuario();
-        usuario.nome = JOptionPane.showInputDialog("Digite a rua");
-        usuario.email = (JOptionPane.showInputDialog("Digite o numero"));
-        usuario.password = JOptionPane.showInputDialog("Digite o bairro");
-        usuario.telefone = JOptionPane.showInputDialog("Digite a cidade");
-        //usuario.endereço = Endereco.parseEndereco(JOptionPane.showInputDialog("Digite o estado"));
-        usuario.isAdmin = Boolean.parseBoolean(JOptionPane.showInputDialog("Digite o país"));
+        usuario.nome = JOptionPane.showInputDialog("Digite o nome");
+        usuario.email = (JOptionPane.showInputDialog("Digite o email"));
+        usuario.password = JOptionPane.showInputDialog("Digite a senha");
+        usuario.endereco = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereço"));
+        usuario.isAdmin = Boolean.parseBoolean(JOptionPane.showInputDialog("Digite 1 para admin e 0 para comum"));
         usuario.save(usuario);
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -113,13 +112,13 @@ public class UsuarioView extends javax.swing.JFrame {
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
        Usuario usuario = new Usuario();
-        usuario.nome = JOptionPane.showInputDialog("Digite a rua");
-        usuario.email = (JOptionPane.showInputDialog("Digite o numero"));
-        usuario.password = JOptionPane.showInputDialog("Digite o bairro");
-        usuario.telefone = JOptionPane.showInputDialog("Digite a cidade");
-        //usuario.endereço = Endereco.parseEndereco(JOptionPane.showInputDialog("Digite o estado"));
-        usuario.isAdmin = Boolean.parseBoolean(JOptionPane.showInputDialog("Digite o país"));
-        usuario.update(usuario);
+       usuario.id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do usuario que quer editar"));
+       usuario.nome = JOptionPane.showInputDialog("Digite o nome");
+       usuario.email = (JOptionPane.showInputDialog("Digite o email"));
+       usuario.password = JOptionPane.showInputDialog("Digite a senha");
+       usuario.isAdmin = Boolean.parseBoolean(JOptionPane.showInputDialog("Digite 1 para admin e 0 para comum"));
+       usuario.endereco = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereço"));
+       usuario.update(usuario);
     }//GEN-LAST:event_UpdateActionPerformed
 
 

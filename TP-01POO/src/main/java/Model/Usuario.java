@@ -15,8 +15,7 @@ public class Usuario {
     public String nome;
     public String email;
     public String password;
-    public String telefone;
-    public int endereço;
+    public int endereco;
     public boolean isAdmin;
     public Date creationDate;
     public Date exclusionDate;
@@ -24,21 +23,20 @@ public class Usuario {
 
     //Constructor
     public Usuario(){}
-    public Usuario(int id, String nome, String email, String password, String telefone, int endereço, boolean isAdmin){
+    public Usuario(int id, String nome, String email, String password, int endereço, boolean isAdmin){
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.telefone = telefone;
-        this.endereço = endereço;
+        this.endereco = endereco;
         this.isAdmin = isAdmin;
         this.creationDate = new Date();
 
     }
 
     public void save(Usuario usuario){
-        String sql = "INSERT INTO usuario (nome,email,password,isAdmin,telefone,endereco)" +
-        " VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO user (nome,email,password,isAdmin,endereco)" +
+        " VALUES(?,?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -48,10 +46,8 @@ public class Usuario {
             pstm.setString(2, usuario.email);
             pstm.setString(3, usuario.password);
             pstm.setBoolean(4, usuario.isAdmin);
-            pstm.setString(5, usuario.telefone);
-            pstm.setObject(6, usuario.endereço);
-            usuario.creationDate = new Date();
-            usuario.exclusionDate = null;
+            pstm.setInt(6, usuario.endereco);
+                       
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Usuario inserido com sucesso");
         } catch (Exception e) {
@@ -72,7 +68,7 @@ public class Usuario {
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM usuario WHERE id_user = ?";
+        String sql = "DELETE FROM user WHERE id_user = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -98,24 +94,23 @@ public class Usuario {
             }
     }
     public void update(Usuario usuario){
-        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, "
-                + "isAdmin = ?, telefone = ?, endereco = ?" +
+        String sql = "UPDATE user SET nome = ?, email = ?, password = ?, "
+                + "isAdmin = ?, id_endereco = ?" +
         " WHERE id_user = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
             conn = Conexao.getConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1,usuario.nome);
-            pstm.setString(2, usuario.email);
-            pstm.setString(3, usuario.password);
-            pstm.setBoolean(4, isAdmin);
-            pstm.setString(6, usuario.telefone);
-            pstm.setObject(7, usuario.endereço);
+            pstm.setString(1,usuario.getNome());
+            pstm.setString(2, usuario.getEmail());
+            pstm.setString(3, usuario.getPassword());
+            pstm.setBoolean(4, usuario.getIsAdmin());
+            pstm.setInt(5, usuario.getEndereco());
+            pstm.setInt(6,usuario.getId());
             //Executa a sql para inserção dos dados
+            pstm.execute();
             JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso");
-        pstm.execute();
-        
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar usuario");
             e.printStackTrace();
@@ -135,8 +130,8 @@ public class Usuario {
     }
     
     public List<Usuario> getUsuario(){
-        String sql = "SELECT * FROM usuario";
-        List<Usuario> enderecos = new ArrayList<Usuario>();
+        String sql = "SELECT * FROM user";
+        List<Usuario> usuarios = new ArrayList<Usuario>();
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rset = null;
@@ -146,14 +141,21 @@ public class Usuario {
         rset = pstm.executeQuery();
         while(rset.next()){
         Usuario usuario = new Usuario();
-        pstm.setObject(5, usuario.endereço);
         usuario.setId(rset.getInt("id_user"));
         usuario.setNome(rset.getString("nome"));
         usuario.setEmail(rset.getString("email"));
         usuario.setPassword(rset.getString("password"));
-        usuario.setTelefone(rset.getString("telefone"));
-        usuario.setAdmin(rset.getBoolean("isAdmin"));
+        usuario.setIsAdmin(rset.getBoolean("isAdmin"));
+        usuario.setEndereco(rset.getInt("id_endereco"));
+        usuario.setCreationDate(rset.getDate("creatinDate"));
+        usuario.setExclusionDate(rset.getDate("exclusionDate"));
+        usuarios.add(usuario);
         }
+        for(int i = 0; i < usuarios.size(); i++){
+                JOptionPane.showMessageDialog(null, usuarios.get(i).ToString());
+            }
+        
+        
         } catch (Exception e) {
         e.printStackTrace();
         }finally{
@@ -172,9 +174,14 @@ public class Usuario {
             }
         }
         
-            return enderecos;
+            return usuarios;
     }
 
+     public String ToString(){
+        return "Nome: "+ this.nome+ "\nEmail: "+ this.email
+                + "\nÉ admin?: "+ this.isAdmin+ 
+                "\nData cadastro: "+ this.creationDate;
+    }
 
 
     //getters setters
@@ -210,20 +217,20 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public int getEndereco() {
+        return endereco;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setEndereco(int endereco) {
+        this.endereco = endereco;
     }
 
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setIsAdmin(boolean admin) {
         isAdmin = admin;
     }
 
