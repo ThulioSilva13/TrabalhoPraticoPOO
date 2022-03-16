@@ -160,14 +160,16 @@ public class Fornecedor {
 
     
     public String ToString(){
-        return "Nome: "+ this.nome+ "\nCategoria: "+ this.categoria+ "\nTelefone: "
-                + this.telefone+ "\nEndereco: "+ this.endereço;
+        return """
+               --------------
+               Nome: """+ this.nome+ "\nCategoria: "+ this.categoria+ "\nTelefone: "
+                + this.telefone+ "\nEndereco: "+ this.endereço+"\n--------------";
     }
     
     public int getId() {
         return id;
     }
-
+//"--------------\n" + 
     public void setId(int id) {
         this.id = id;
     }

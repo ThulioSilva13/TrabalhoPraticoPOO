@@ -147,13 +147,13 @@ public class Usuario {
         usuario.setPassword(rset.getString("password"));
         usuario.setIsAdmin(rset.getBoolean("isAdmin"));
         usuario.setEndereco(rset.getInt("id_endereco"));
-        usuario.setCreationDate(rset.getDate("creatinDate"));
-        usuario.setExclusionDate(rset.getDate("exclusionDate"));
         usuarios.add(usuario);
         }
-        for(int i = 0; i < usuarios.size(); i++){
-                JOptionPane.showMessageDialog(null, usuarios.get(i).ToString());
-            }
+//        for(int i = 0; i < usuarios.size(); i++){
+//                JOptionPane.showMessageDialog(null, usuarios.get(i).ToString());
+//            }
+       JOptionPane.showMessageDialog(null, usuarios.toString());
+          
         
         
         } catch (Exception e) {
@@ -177,10 +177,13 @@ public class Usuario {
             return usuarios;
     }
 
-     public String ToString(){
-        return "Nome: "+ this.nome+ "\nEmail: "+ this.email
-                + "\nÉ admin?: "+ this.isAdmin+ 
-                "\nData cadastro: "+ this.creationDate;
+    
+    @Override
+     public String toString(){
+        return """
+               --------------
+               Nome: """+ this.nome+
+                "\nEmail: "+ this.email+"\n--------------";
     }
 
 

@@ -148,9 +148,9 @@ public class Endereco {
                 endereco.setCEP(rset.getString("cep"));
                 enderecos.add(endereco);
             }
-            for(int i = 0; i < enderecos.size(); i++){
-                JOptionPane.showMessageDialog(null, enderecos.get(i).ToString());
-            }
+            
+            JOptionPane.showMessageDialog(null, enderecos.toString());
+            
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,11 +206,13 @@ public class Endereco {
         return id;
      }
 
-    
-    public String ToString(){
-        return "Rua: "+ this.rua+ "\nNumero: "+ this.numero+ "\nBairro: "
+    @Override
+    public String toString(){
+        return """
+               --------------
+               Rua: """+ this.rua+ "\nNumero: "+ this.numero+ "\nBairro: "
                 + this.bairro+ "\nCidade: "+ this.cidade+ 
-                "\nPaís: "+ this.pais+ "\nCEP: "+ this.CEP;
+                "\nPaís: "+ this.pais+ "\nCEP: "+ this.CEP+"\n--------------";
     }
     public int getId() {
         return id;

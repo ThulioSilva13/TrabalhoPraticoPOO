@@ -118,10 +118,8 @@ public class FornecedorView extends javax.swing.JFrame {
     }//GEN-LAST:event_InsertActionPerformed
 
     private void GetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetAllActionPerformed
-//        Fornecedor fornecedor = new Fornecedor();
-//        fornecedor.getFornecedores();
-          Endereco endereco = new Endereco();
-          endereco.getIdEndereco();
+        Fornecedor fornecedor = new Fornecedor();
+        fornecedor.getFornecedores();
     }//GEN-LAST:event_GetAllActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed

@@ -200,6 +200,7 @@ public class Produto{
   public List<Produto> getProdutos(){
         String sql = "SELECT * FROM produto";
         List<Produto> produtos = new ArrayList<Produto>();
+       //ArrayList<Produto> produtos;
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rset = null;
@@ -216,9 +217,10 @@ public class Produto{
                 produto.setCor(rset.getString("cor"));
                 produtos.add(produto);
             }
-            for(int i = 0; i < produtos.size(); i++){
-                JOptionPane.showMessageDialog(null, produtos.get(i).ToString());
-            }
+            //for(int i = 0; i < produtos.size(); i++){
+            //    JOptionPane.showMessageDialog(null, produtos.get(i).ToString());
+            //}
+            JOptionPane.showMessageDialog(null, produtos.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
@@ -238,12 +240,15 @@ public class Produto{
         }
           return produtos;
  }
-  
-   public String ToString(){
-        return "Nome: "+ this.nome+ "\nPreço: R$"+ this.preco+ "\nQuantidade: "
-                + this.quantidade+ "\nModelo: "+ this.modelo+ 
-                "\nCor: "+ this.cor;
-    }
+    
+  @Override
+   public String toString(){
+        return """
+               --------------
+               """+ "\nId: " + this.id+ "\nNome: "+ this.nome+ "\nPreço: R$"+ this.preco+ "\nQuantidade: "
+           + this.quantidade+ "\nModelo: "+ this.modelo+ 
+           "\nCor: "+ this.cor+"\n--------------";
+    }   
     public int getId() {
         return id;
     }
