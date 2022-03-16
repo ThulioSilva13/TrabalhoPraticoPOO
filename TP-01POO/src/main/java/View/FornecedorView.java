@@ -4,7 +4,9 @@
  */
 package View;
 
+import Model.Endereco;
 import Model.Fornecedor;
+import Model.Produto;
 import javax.swing.JOptionPane;
 
 /**
@@ -97,24 +99,38 @@ public class FornecedorView extends javax.swing.JFrame {
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
         Fornecedor fornecedor = new Fornecedor();
-        fornecedor.nome = JOptionPane.showInputDialog("Digite o nome");
+        Endereco endereco = new Endereco();
+        JOptionPane.showMessageDialog(null, "Para concluir o cadastro do fornecedor, cadastre um endereço!");
+        endereco.rua = JOptionPane.showInputDialog("Digite a rua");
+        endereco.numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero"));
+        endereco.bairro = JOptionPane.showInputDialog("Digite o bairro");
+        endereco.cidade = JOptionPane.showInputDialog("Digite a cidade");
+        endereco.estado = JOptionPane.showInputDialog("Digite o estado");
+        endereco.pais = JOptionPane.showInputDialog("Digite o país");
+        endereco.CEP = JOptionPane.showInputDialog("Digite o CEP");
+        endereco.save(endereco);
+        int id_endereco = endereco.getIdEndereco(endereco);
+        fornecedor.nome = JOptionPane.showInputDialog("Digite o nome do fornecedor");
         fornecedor.categoria = (JOptionPane.showInputDialog("Digite a categoria"));
         fornecedor.telefone = JOptionPane.showInputDialog("Digite o telefone");
-        fornecedor.endereço = JOptionPane.showInputDialog("Digite o endereco");
+        fornecedor.endereço = id_endereco;
         fornecedor.save(fornecedor);
     }//GEN-LAST:event_InsertActionPerformed
 
     private void GetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetAllActionPerformed
-        Fornecedor fornecedor = new Fornecedor();
-        fornecedor.getFornecedores();
+//        Fornecedor fornecedor = new Fornecedor();
+//        fornecedor.getFornecedores();
+          Produto produto = new Produto();
+          produto.getEstoque(1);
     }//GEN-LAST:event_GetAllActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         Fornecedor fornecedor = new Fornecedor();
+        fornecedor.id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do fornecedor que deseja editar"));
         fornecedor.nome = JOptionPane.showInputDialog("Digite o nome");
         fornecedor.categoria = (JOptionPane.showInputDialog("Digite a categoria"));
         fornecedor.telefone = JOptionPane.showInputDialog("Digite o telefone");
-        fornecedor.endereço = JOptionPane.showInputDialog("Digite o endereco");
+        fornecedor.endereço = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereco"));
         fornecedor.update(fornecedor);
     }//GEN-LAST:event_UpdateActionPerformed
 

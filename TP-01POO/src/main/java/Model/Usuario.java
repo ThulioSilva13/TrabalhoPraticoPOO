@@ -16,7 +16,7 @@ public class Usuario {
     public String email;
     public String password;
     public String telefone;
-    public Endereco endereço;
+    public int endereço;
     public boolean isAdmin;
     public Date creationDate;
     public Date exclusionDate;
@@ -24,7 +24,7 @@ public class Usuario {
 
     //Constructor
     public Usuario(){}
-    public Usuario(int id, String nome, String email, String password, String telefone, Endereco endereço, boolean isAdmin){
+    public Usuario(int id, String nome, String email, String password, String telefone, int endereço, boolean isAdmin){
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -72,7 +72,7 @@ public class Usuario {
     }
 
     public void removeById(int id){
-        String sql = "DELETE FROM usuario WHERE id = ?";
+        String sql = "DELETE FROM usuario WHERE id_user = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -82,7 +82,7 @@ public class Usuario {
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Usuario removido com sucesso");
             }catch (Exception e) {
-                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "Erro ao remover usuario");
                 e.printStackTrace();
             }finally{
                 try{
@@ -98,8 +98,9 @@ public class Usuario {
             }
     }
     public void update(Usuario usuario){
-        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, isAdmin = ?, telefone = ?, endereco = ?" +
-        " WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, email = ?, password = ?, "
+                + "isAdmin = ?, telefone = ?, endereco = ?" +
+        " WHERE id_user = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -108,8 +109,9 @@ public class Usuario {
             pstm.setString(1,usuario.nome);
             pstm.setString(2, usuario.email);
             pstm.setString(3, usuario.password);
-            pstm.setString(4, usuario.telefone);
-            pstm.setObject(5, usuario.endereço);
+            pstm.setBoolean(4, isAdmin);
+            pstm.setString(6, usuario.telefone);
+            pstm.setObject(7, usuario.endereço);
             //Executa a sql para inserção dos dados
             JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso");
         pstm.execute();
@@ -145,7 +147,7 @@ public class Usuario {
         while(rset.next()){
         Usuario usuario = new Usuario();
         pstm.setObject(5, usuario.endereço);
-        usuario.setId(rset.getInt("id"));
+        usuario.setId(rset.getInt("id_user"));
         usuario.setNome(rset.getString("nome"));
         usuario.setEmail(rset.getString("email"));
         usuario.setPassword(rset.getString("password"));

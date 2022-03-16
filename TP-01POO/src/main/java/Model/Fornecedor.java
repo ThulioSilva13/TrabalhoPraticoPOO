@@ -12,7 +12,7 @@ public class Fornecedor {
     public int id;
     public String categoria;
     public String telefone;
-    public String endereço;
+    public int endereço;
     public String nome;
 
     //Constructor
@@ -25,8 +25,8 @@ public class Fornecedor {
     }
 
     public void save(Fornecedor fornecedor){
-        String sql = "INSERT INTO fornecedor(categoria,telefone,nome)" +
-        " VALUES(?,?,?)";
+        String sql = "INSERT INTO fornecedor(categoria,telefone,nome,id_endereco)" +
+        " VALUES(?,?,?,?)";
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
@@ -35,6 +35,8 @@ public class Fornecedor {
             pstm.setString(1,fornecedor.categoria);
             pstm.setString(2, fornecedor.telefone);
             pstm.setString(3, fornecedor.nome);
+            pstm.setInt(4,fornecedor.endereço);
+            
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Fornecedor inserido com sucesso");
         } catch (Exception e) {
@@ -89,10 +91,10 @@ public class Fornecedor {
         try {
             conn = Conexao.getConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, fornecedor.id);
-            pstm.setString(2,fornecedor.categoria);
-            pstm.setString(3, fornecedor.telefone);
-            pstm.setString(4, fornecedor.nome);
+            pstm.setString(1, fornecedor.getCategoria());
+            pstm.setString(2,fornecedor.getTelefone());
+            pstm.setString(3, fornecedor.getNome());
+            pstm.setInt(4, fornecedor.getId());
             //Executa a sql para inserção dos dados
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Fornecedor atualizado com sucesso");
@@ -115,23 +117,28 @@ public class Fornecedor {
     }
     public List<Fornecedor> getFornecedores(){
         String sql = "SELECT * FROM fornecedor";
-        List<Fornecedor> enderecos = new ArrayList<Fornecedor>();
+        List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rset = null;
         try {
-        conn = Conexao.getConexao();
-        pstm = conn.prepareStatement(sql);
-        rset = pstm.executeQuery();
-        while(rset.next()){
-        Fornecedor fornecedor = new Fornecedor();
-        fornecedor.setId(rset.getInt("id"));
-        fornecedor.setCategoria(rset.getString("categoria"));
-        fornecedor.setTelefone(rset.getString("telefone"));
-        fornecedor.setNome(rset.getString("nome"));
-        }
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            rset = pstm.executeQuery();
+            while(rset.next()){
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setId(rset.getInt("id_fornecedor"));
+                fornecedor.setCategoria(rset.getString("categoria"));
+                fornecedor.setTelefone(rset.getString("telefone"));
+                fornecedor.setNome(rset.getString("nome"));
+                fornecedor.setEndereço(rset.getInt("id_endereco"));
+                fornecedores.add(fornecedor);
+            }
+            for(int i = 0; i < fornecedores.size(); i++){
+                JOptionPane.showMessageDialog(null, fornecedores.get(i).ToString());
+            }
         } catch (Exception e) {
-        e.printStackTrace();
+             e.printStackTrace();
         }finally{
             try{
             if(rset != null){
@@ -148,9 +155,15 @@ public class Fornecedor {
             }
         }
         
-            return enderecos;
+            return fornecedores;
         }
 
+    
+    public String ToString(){
+        return "Nome: "+ this.nome+ "\nCategoria: "+ this.categoria+ "\nTelefone: "
+                + this.telefone+ "\nEndereco: "+ this.endereço;
+    }
+    
     public int getId() {
         return id;
     }
@@ -175,11 +188,11 @@ public class Fornecedor {
         this.telefone = telefone;
     }
 
-    public String getEndereço() {
+    public int getEndereço() {
         return endereço;
     }
 
-    public void setEndereço(String endereço) {
+    public void setEndereço(int endereço) {
         this.endereço = endereço;
     }
 

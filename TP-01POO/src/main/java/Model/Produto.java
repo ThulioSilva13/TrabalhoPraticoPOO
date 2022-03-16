@@ -140,7 +140,11 @@ public class Produto{
         PreparedStatement pstm = null;
         ResultSet rset = null;
         try{
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
+            rset = pstm.executeQuery();
+            rset.next();
             quantidade = rset.getInt("quantidade");
             JOptionPane.showMessageDialog(null, "A quantidade é: " +quantidade);
         } catch (Exception e) {
@@ -173,6 +177,7 @@ public class Produto{
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1,qntd);
             pstm.setInt(2,id);
+            pstm.execute();
             JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso");
        }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar estoque\n"+e);
