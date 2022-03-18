@@ -177,7 +177,39 @@ public class Usuario {
             return usuarios;
     }
 
-    
+    public int getIdPorEmail(String email){
+        String sql = "SELECT id_user FROM user WHERE email = ?";
+        int id = 0;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        try{
+            conn = Conexao.getConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, email);
+            rset = pstm.executeQuery();
+            rset.next();
+            id = rset.getInt("id_user");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao obter usuario");
+            e.printStackTrace();
+        }finally{
+            try{
+                if(rset != null){
+                rset.close();
+                }
+                if(pstm != null){
+                pstm.close();
+                }
+                if(conn != null){
+                conn.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return id;
+    }
     @Override
      public String toString(){
         return """

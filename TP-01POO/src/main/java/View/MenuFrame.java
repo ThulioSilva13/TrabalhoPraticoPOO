@@ -31,6 +31,7 @@ public class MenuFrame extends javax.swing.JFrame {
         Fornecedor = new javax.swing.JButton();
         Produto = new javax.swing.JButton();
         Usuario = new javax.swing.JButton();
+        Compra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +65,13 @@ public class MenuFrame extends javax.swing.JFrame {
             }
         });
 
+        Compra.setText("Compra");
+        Compra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,7 +88,9 @@ public class MenuFrame extends javax.swing.JFrame {
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGap(149, 149, 149)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(Compra))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,11 +102,13 @@ public class MenuFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Endereco)
                     .addComponent(Fornecedor))
-                .addGap(39, 39, 39)
+                .addGap(43, 43, 43)
+                .addComponent(Compra)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Produto)
                     .addComponent(Usuario))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,6 +133,11 @@ public class MenuFrame extends javax.swing.JFrame {
         UsuarioView usuarioView = new UsuarioView();
         usuarioView.setVisible(true);
     }//GEN-LAST:event_UsuarioActionPerformed
+
+    private void CompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompraActionPerformed
+        Usuario_ProdutoView usuario_ProdutoView = new Usuario_ProdutoView();
+        usuario_ProdutoView.setVisible(true);
+    }//GEN-LAST:event_CompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +176,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Compra;
     private javax.swing.JButton Endereco;
     private javax.swing.JButton Fornecedor;
     private javax.swing.JButton Produto;

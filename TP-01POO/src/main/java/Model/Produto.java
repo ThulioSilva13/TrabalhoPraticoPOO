@@ -146,7 +146,7 @@ public class Produto{
             rset = pstm.executeQuery();
             rset.next();
             quantidade = rset.getInt("quantidade");
-            JOptionPane.showMessageDialog(null, "A quantidade é: " +quantidade);
+           // JOptionPane.showMessageDialog(null, "A quantidade é: " +quantidade);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao obter quantidade");
             e.printStackTrace();
@@ -178,7 +178,7 @@ public class Produto{
             pstm.setInt(1,qntd);
             pstm.setInt(2,id);
             pstm.execute();
-            JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso");
+            //JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso");
        }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar estoque\n"+e);
             e.printStackTrace();
@@ -210,6 +210,7 @@ public class Produto{
             rset = pstm.executeQuery();
             while(rset.next()){
                 Produto produto = new Produto();
+                produto.setId(rset.getInt("id_produto"));
                 produto.setNome(rset.getString("nome"));
                 produto.setPreco(rset.getDouble("preco"));
                 produto.setQuantidade(rset.getInt("quantidade"));
