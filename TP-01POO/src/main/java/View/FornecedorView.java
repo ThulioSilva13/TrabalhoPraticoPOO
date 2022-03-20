@@ -65,13 +65,13 @@ public class FornecedorView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Update)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                        .addComponent(Delete))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Insert)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                        .addComponent(GetAll))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Update)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(GetAll)))
+                        .addComponent(Delete)))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -81,11 +81,11 @@ public class FornecedorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Insert)
                     .addComponent(GetAll))
-                .addGap(42, 42, 42)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Update)
                     .addComponent(Delete))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pack();

@@ -24,6 +24,7 @@ public class ProdutoView extends javax.swing.JFrame {
         GetAll = new javax.swing.JButton();
         Update = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
+        ReporEstoque = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,19 +56,31 @@ public class ProdutoView extends javax.swing.JFrame {
             }
         });
 
+        ReporEstoque.setText("Repor Estoque");
+        ReporEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporEstoqueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Insert)
-                    .addComponent(Update, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GetAll, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Insert)
+                            .addComponent(Update, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(99, 99, 99)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(GetAll, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(ReporEstoque)))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,11 +90,13 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GetAll)
                     .addComponent(Insert))
-                .addGap(50, 50, 50)
+                .addGap(39, 39, 39)
+                .addComponent(ReporEstoque)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Update)
                     .addComponent(Delete))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,11 +134,23 @@ public class ProdutoView extends javax.swing.JFrame {
        produto.update(produto);
     }//GEN-LAST:event_UpdateActionPerformed
 
+    private void ReporEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporEstoqueActionPerformed
+        Produto produto = new Produto();
+        produto.getProdutos();
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do produto que queria repor estoque"));
+        int qntd = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo estoque para o produto"));
+        int oldEstoque = produto.getEstoque(id);
+        produto.setEstoque(id, qntd+oldEstoque);
+        int newEstoque = produto.getEstoque(id);
+        JOptionPane.showMessageDialog(null,"o novo estoque do produto é: "+newEstoque);
+    }//GEN-LAST:event_ReporEstoqueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
     private javax.swing.JButton GetAll;
     private javax.swing.JButton Insert;
+    private javax.swing.JButton ReporEstoque;
     private javax.swing.JButton Update;
     // End of variables declaration//GEN-END:variables
 }
