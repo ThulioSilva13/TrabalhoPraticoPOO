@@ -12,15 +12,15 @@ public class Fornecedor {
     public int id;
     public String categoria;
     public String telefone;
-    public int endereço;
+    public int endereco;
     public String nome;
 
     //Constructor
     public Fornecedor(){}
-    public Fornecedor(int id, String categoria, String telefone, String endereço, String nome){
-        this.id = id;
+    public Fornecedor(String categoria, String telefone, int endereco, String nome){
         this.categoria = categoria;
         this.telefone = telefone;
+        this.endereco = endereco;
         this.nome = nome;
     }
 
@@ -35,7 +35,7 @@ public class Fornecedor {
             pstm.setString(1,fornecedor.categoria);
             pstm.setString(2, fornecedor.telefone);
             pstm.setString(3, fornecedor.nome);
-            pstm.setInt(4,fornecedor.endereço);
+            pstm.setInt(4,fornecedor.endereco);
             
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Fornecedor inserido com sucesso");
@@ -161,7 +161,7 @@ public class Fornecedor {
         return """
                --------------
                Nome: """+ this.nome+ "\nCategoria: "+ this.categoria+ "\nTelefone: "
-                + this.telefone+ "\nEndereco: "+ this.endereço+"\n--------------";
+                + this.telefone+ "\nEndereco: "+ this.endereco+"\n--------------";
     }
     
     public int getId() {
@@ -189,11 +189,11 @@ public class Fornecedor {
     }
 
     public int getEndereço() {
-        return endereço;
+        return endereco;
     }
 
     public void setEndereço(int endereço) {
-        this.endereço = endereço;
+        this.endereco = endereço;
     }
 
     public String getNome() {

@@ -12,8 +12,6 @@ public class Produto{
     public String nome;
     public Double preco;
     public int quantidade;
-    public String tamanho;
-    public String categoria;
     public String modelo;
     public String cor;
     
@@ -29,13 +27,10 @@ public class Produto{
         }
     }*/
     public Produto(){}
-    public Produto(int Id, String Nome, Double Preco, int Quantidade, String Tamanho,String categoria, String Modelo, String Cor){
-        this.id = Id;
+    public Produto(String Nome, Double Preco, int Quantidade, String Modelo, String Cor){
         this.nome = Nome;
         this.preco = Preco;
         this.quantidade = Quantidade;
-        this.tamanho = Tamanho;
-        this.categoria = categoria;
         this.modelo = Modelo;
         this.cor = Cor;
     }
@@ -282,21 +277,6 @@ public class Produto{
         this.quantidade = quantidade;
     }
 
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(String tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     public String getModelo() {
         return modelo;

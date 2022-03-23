@@ -17,20 +17,16 @@ public class Usuario {
     public String password;
     public int endereco;
     public boolean isAdmin;
-    public Date creationDate;
-    public Date exclusionDate;
 
 
     //Constructor
     public Usuario(){}
-    public Usuario(int id, String nome, String email, String password, int endereço, boolean isAdmin){
-        this.id = id;
+    public Usuario(String nome, String email, String password, int endereço, boolean isAdmin){
         this.nome = nome;
         this.email = email;
         this.password = password;
         this.endereco = endereco;
         this.isAdmin = isAdmin;
-        this.creationDate = new Date();
 
     }
 
@@ -268,21 +264,5 @@ public class Usuario {
     public void setIsAdmin(boolean admin) {
         isAdmin = admin;
     }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getExclusionDate() {
-        return exclusionDate;
-    }
-
-    public void setExclusionDate(Date exclusionDate) {
-        this.exclusionDate = exclusionDate;
-    }
-
+   
 }

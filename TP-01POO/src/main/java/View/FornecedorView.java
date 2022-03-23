@@ -113,7 +113,7 @@ public class FornecedorView extends javax.swing.JFrame {
         fornecedor.nome = JOptionPane.showInputDialog("Digite o nome do fornecedor");
         fornecedor.categoria = (JOptionPane.showInputDialog("Digite a categoria"));
         fornecedor.telefone = JOptionPane.showInputDialog("Digite o telefone");
-        fornecedor.endereço = id_endereco;
+        fornecedor.endereco = id_endereco;
         fornecedor.save(fornecedor);
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -128,7 +128,7 @@ public class FornecedorView extends javax.swing.JFrame {
         fornecedor.nome = JOptionPane.showInputDialog("Digite o nome");
         fornecedor.categoria = (JOptionPane.showInputDialog("Digite a categoria"));
         fornecedor.telefone = JOptionPane.showInputDialog("Digite o telefone");
-        fornecedor.endereço = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereco"));
+        fornecedor.endereco = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do endereco"));
         fornecedor.update(fornecedor);
     }//GEN-LAST:event_UpdateActionPerformed
 

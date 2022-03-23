@@ -18,8 +18,7 @@ public class Endereco {
     public String CEP;
     //Constructor
     public Endereco(){}
-    public Endereco(int id, int numero, String rua, String bairro, String cidade, String estado, String pais, String CEP){
-        this.id = id;
+    public Endereco(int numero, String rua, String bairro, String cidade, String estado, String pais, String CEP){
         this.numero = numero;
         this.rua = rua;
         this.bairro = bairro;
